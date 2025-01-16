@@ -6,11 +6,72 @@ const { getTodo, getTodoById } = require("../controllers/getTodo");
 const { updateTodo } = require("../controllers/updateTodo");
 const { deleteTodo } = require("../controllers/deleteTodo");
 
+
+router.post("/createTodo", createTodo);
+router.get("/getTodo", getTodo);
+router.get("/getTodo/:id", getTodoById);
+router.put("/updateTodo/:id", updateTodo);
+router.delete("/deleteTodo/:id", deleteTodo);
+
+
+
+module.exports = router;
+
+
+/**
+ * @swagger
+ * /getTodo:
+ *   get:
+ *     summary: 
+ *     tags: [Todos]
+ *     responses:
+ *       200:
+ *         description: Successfully fetched all todos.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       _id:
+ *                         type: string
+ *                       title:
+ *                         type: string
+ *                       description:
+ *                         type: string
+ *                       completed:
+ *                         type: boolean
+ *                 message:
+ *                   type: string
+ *                   example: Data Fetchd Successfully
+ *       500:
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 data:
+ *                   type: null
+ *                 message:
+ *                   type: string
+ *                   example: Internal server error
+ */
+
 /**
  * @swagger
  * /createTodo:
  *   post:
- *     summary: Create a new todo
+ *     summary: 
  *     tags: [Todos]
  *     requestBody:
  *       required: true
@@ -38,31 +99,11 @@ const { deleteTodo } = require("../controllers/deleteTodo");
  *                 message:
  *                   type: string
  */
-router.post("/createTodo", createTodo);
-
-/**
- * @swagger
- * /getTodo:
- *   get:
- *     summary: Get all todos
- *     tags: [Todos]
- *     responses:
- *       200:
- *         description: List of all todos.
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Todo'
- */
-router.get("/getTodo", getTodo);
-
 /**
  * @swagger
  * /getTodo/{id}:
  *   get:
- *     summary: Get a todo by ID
+ *     summary: 
  *     tags: [Todos]
  *     parameters:
  *       - in: path
@@ -86,13 +127,11 @@ router.get("/getTodo", getTodo);
  *                 message:
  *                   type: string
  */
-router.get("/getTodo/:id", getTodoById);
-
 /**
  * @swagger
  * /updateTodo/{id}:
  *   put:
- *     summary: Update a todo by ID
+ *     summary: 
  *     tags: [Todos]
  *     parameters:
  *       - in: path
@@ -127,13 +166,11 @@ router.get("/getTodo/:id", getTodoById);
  *                 message:
  *                   type: string
  */
-router.put("/updateTodo/:id", updateTodo);
-
 /**
  * @swagger
  * /deleteTodo/{id}:
  *   delete:
- *     summary: Delete a todo by ID
+ *     summary: 
  *     tags: [Todos]
  *     parameters:
  *       - in: path
@@ -155,6 +192,3 @@ router.put("/updateTodo/:id", updateTodo);
  *                 message:
  *                   type: string
  */
-router.delete("/deleteTodo/:id", deleteTodo);
-
-module.exports = router;
